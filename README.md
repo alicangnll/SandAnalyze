@@ -1,4 +1,4 @@
-# Sandbox-Malware-Analyzer
+# SandAnalyze
 Qiling Sandbox for Malware Analyze
 
 <b>Installation</b>
