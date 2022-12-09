@@ -46,4 +46,8 @@ class QilingSandBox_Windows:
         if(arch == "64"):
             QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x8664_windows/bin/" + exeloc], r"examples/rootfs/x8664_windows")
         else:
+<<<<<<< Updated upstream
             QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x86_windows/bin/" + exeloc], r"examples/rootfs/x86_windows")
+=======
+            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x86_windows/bin/" + exeloc], r"examples/rootfs/x86_windows")
+>>>>>>> Stashed changes
