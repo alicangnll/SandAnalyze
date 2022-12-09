@@ -4,3 +4,4 @@ pefile
 platform
 unittest
 collections
+socket
