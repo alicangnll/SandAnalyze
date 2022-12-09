@@ -31,7 +31,7 @@ class QilingSandBox_Windows:
         ql = Qiling(path, rootfs)
         ql.os.set_api("GetProcAddress", QilingSandBox_Windows.GetProcAddress, QL_INTERCEPT.EXIT)
         ql.hook_address(QilingSandBox_Windows.stop, 0x0042B726)
-r        ql.run()
+        ql.run()
 
     def runwindows(exeloc):
         try:
