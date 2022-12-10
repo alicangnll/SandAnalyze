@@ -1,9 +1,22 @@
-import capstone, pefile, sys
+import capstone, pefile, sys, random
 from qiling import *
 from qiling.const import *
 from qiling.os import *
 from capstone import *
 from qiling.const import QL_VERBOSE
+from qiling.os.mapper import QlFsMappedObject
+
+
+class Fake_Drive(QlFsMappedObject):
+    def read(self, size):
+        return random.randint(0, 256)
+    def write(self, bs):
+        print(bs)
+        return len(bs)      
+    def fstat(self):
+        return -1
+    def close(self):
+        return 0
 
 class QilingSandBox_Windows:
     def pe_load(pe):
@@ -30,8 +43,13 @@ class QilingSandBox_Windows:
         ql.emu_stop()
 
     def my_sandbox(path, rootfs, arch):
-        ql = Qiling(path, rootfs, archtype=arch, verbose=QL_VERBOSE.DEBUG)
+        ql = Qiling(path, rootfs, archtype=arch, ostype="windows", verbose=QL_VERBOSE.DEBUG)
         ql.debugger = "qdb"
+        ql.run(timeout=5000)
+
+    def windisk_analyze(path, rootfs):
+        ql = Qiling(path, rootfs, verbose=QL_VERBOSE.DEBUG)
+        ql.add_fs_mapper(r"\\.\PHYSICALDRIVE0", Fake_Drive.read())
         ql.run()
 
     def runwindows(exeloc):
