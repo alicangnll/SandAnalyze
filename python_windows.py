@@ -1,9 +1,9 @@
 import capstone, pefile, sys
-from unicorn.arm_const import *
 from qiling import *
 from qiling.const import *
 from qiling.os import *
 from capstone import *
+from qiling.const import QL_VERBOSE
 
 class QilingSandBox_Windows:
     def pe_load(pe):
@@ -11,6 +11,9 @@ class QilingSandBox_Windows:
         data = pe.get_memory_mapped_image()[entry_point:]
         return capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32).disasm(data, 0x10000)
 
+    def hook(ql, force_call_dialog_func, basecode):
+        ql.hook_address(force_call_dialog_func, basecode)
+    
     def arch(pe):
         if pe.FILE_HEADER.Machine == 0x14c:
             bit = 32
@@ -26,8 +29,8 @@ class QilingSandBox_Windows:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
-    def my_sandbox(path, rootfs):
-        ql = Qiling(path, rootfs)
+    def my_sandbox(path, rootfs, arch):
+        ql = Qiling(path, rootfs, archtype=arch, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = "qdb"
         ql.run()
 
@@ -44,6 +47,6 @@ class QilingSandBox_Windows:
         arch = str(QilingSandBox_Windows.arch(pefile.PE("examples/rootfs/x8664_windows/bin/" + exeloc)))
         print("[+] Arch : " + str(QilingSandBox_Windows.arch(pefile.PE("examples/rootfs/x8664_windows/bin/" + exeloc))))
         if(arch == "64"):
-            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x8664_windows/bin/" + exeloc], r"examples/rootfs/x8664_windows")
+            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x8664_windows/bin/" + exeloc], r"examples/rootfs/x8664_windows", arch)
         else:
-            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x86_windows/bin/" + exeloc], r"examples/rootfs/x86_windows")
+            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x86_windows/bin/" + exeloc], r"examples/rootfs/x86_windows", arch)
