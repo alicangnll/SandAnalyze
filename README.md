@@ -1,7 +1,7 @@
 # SandAnalyze
-Simulate Windows EXE for Malware Research!
+🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS for Malware Research!
 
-<h2>What is This ?</h2>
+<h2>❓What is This ?</h2>
 <p>
 <b>ENGLISH</b>
 <hr>
@@ -16,7 +16,7 @@ SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger yardımıyla
 <img src="pic/test2.png" />
 <br>
 
-<h2>Installation</h2>
+<h2>😎 Installation</h2>
 <p>
 <b>ENGLISH</b>
 <hr>
