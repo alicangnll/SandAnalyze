@@ -6,7 +6,7 @@ Simulate Windows EXE for Malware Research!
 <b>ENGLISH</b>
 <br>
 SandAnalyze is a program that allows you to examine Windows EXE files on Linux with the help of GDB Debugger and perform operations on memory.
-<br>
+<br><br>
 <b>TURKISH</b>
 <br>
 SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger yardımıyla inceleyebileceğiniz ve memory üzerinde işlem yapabileceğiniz bir programdır.
@@ -27,7 +27,7 @@ If the file you want to examine is 32 bit, copy the EXE file into the "examples/
 Then, run the "pip3 install -r requirements.txt" command on a Linux computer and install the Python PIP packages.
 
 After all these procedures, you can start examining your EXE file with the "python3 example.py example.exe" command.
-<br>
+<br><br>
 <b>TURKISH</b>
 <br>
 Öncelikle, Windows bir bilgisayar üzerinde "dllscollector.bat" dosyasını çalıştırın.
