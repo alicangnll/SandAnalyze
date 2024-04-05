@@ -17,7 +17,7 @@ SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger yardımıyla
 <br>
 
 <b>Installation</b>
-<pre>
+<p>
 <b>ENGLISH</b>
 <br>
 First, run the "dllscollector.bat" file on a Windows computer.
@@ -37,7 +37,7 @@ After all these procedures, you can start examining your EXE file with the "pyth
 Ardından Linux bir bilgisayar üzerinden "pip3 install -r requirements.txt" komutunu çalıştırıp Python PIP paketlerini kurun.
 
 Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyanızı incelemeye başlayabilirsiniz.
-</pre>
+</p>
 
 <br>
 <img src="pic/test1.png" />
