@@ -1,4 +1,4 @@
-# 🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS for Malware Research!
+# 🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS!
 
 <h2>❓What is This ?</h2>
 <p>
@@ -22,7 +22,7 @@ First, run the "dllscollector.bat" file on a Windows computer.
 If the file you want to examine is 32 bit, copy the EXE file into the "examples/rootfs/x86_windows/bin" folder, if it is 64 bit, copy the EXE file into the "examples/rootfs/x8664_windows/bin" folder.
 Then, run the "pip3 install -r requirements.txt" command on a Linux computer and install the Python PIP packages.
 After all these procedures, you can start examining your EXE file with the "python3 example.py example.exe" command.
-<br><br>
+<br>
 <h3>TURKISH</h3>
 <br>
 Öncelikle, Windows bir bilgisayar üzerinde "dllscollector.bat" dosyasını çalıştırın.
