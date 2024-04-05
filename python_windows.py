@@ -1,4 +1,4 @@
-import capstone, pefile, sys, random
+import capstone, pefile, sys, random, os
 from qiling import *
 from qiling.const import *
 from qiling.os import *
@@ -38,13 +38,13 @@ class QilingSandBox_Windows:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
-    def my_sandbox(path, rootfs, arch):
-        ql = Qiling(path, rootfs, archtype=arch, ostype="windows", verbose=QL_VERBOSE.DEBUG)
+    def my_sandbox(path, rootfs):
+        ql = Qiling(path, rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = "qdb"
         ql.run(timeout=5000)
 
-    def shellcode_sandbox(path, rtfs, arch, shellcode):
-        ql = Qiling(shellcoder=shellcode, rootfs=rtfs, ostype="windows", archtype=arch)
+    def shellcode_sandbox(path, rtfs, shellcode):
+        ql = Qiling(shellcoder=shellcode, rootfs=rtfs)
         ql.debugger = "qdb"
         ql.run(timeout=5000)
         
@@ -64,9 +64,9 @@ class QilingSandBox_Windows:
             print("[-] PEFormatError: %s" % e.value)
             print("[!] The file is not a valid PE")
             sys.exit()
-        arch = str(QilingSandBox_Windows.arch(pefile.PE("examples/rootfs/x8664_windows/bin/" + exeloc)))
-        print("[+] Arch : " + str(QilingSandBox_Windows.arch(pefile.PE("examples/rootfs/x8664_windows/bin/" + exeloc))))
+        arch = str(QilingSandBox_Windows.arch(pefile.PE(os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc)))
+        print("[+] Arch : " + str(QilingSandBox_Windows.arch(pefile.PE(os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc))))
         if(arch == "64"):
-            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x8664_windows/bin/" + exeloc], r"examples/rootfs/x8664_windows", arch)
+            QilingSandBox_Windows.my_sandbox([r"" + os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc], r"" + os.getcwd() + "/examples/rootfs/x8664_windows")
         else:
-            QilingSandBox_Windows.my_sandbox([r"examples/rootfs/x86_windows/bin/" + exeloc], r"examples/rootfs/x86_windows", arch)
+            QilingSandBox_Windows.my_sandbox([r"" + os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc], r"" + os.getcwd() + "/examples/rootfs/x86_windows")

@@ -1,7 +1,3 @@
 qiling
 capstone
 pefile
-platform
-unittest
-collections
-socket
