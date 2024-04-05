@@ -37,6 +37,6 @@ Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyan
 
 <h2>📷 Video</h2>
 <video width="320" height="240" controls>
-<source src="example.mp4" type="video/mp4">
+<source src="pic/example.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
