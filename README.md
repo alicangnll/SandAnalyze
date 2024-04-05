@@ -1,4 +1,4 @@
-# 🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS for Malware Research!
+# 🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS!
 
 <h2>❓What is This ?</h2>
 <p>
