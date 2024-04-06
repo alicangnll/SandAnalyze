@@ -1,4 +1,3 @@
 qiling
 capstone
 pefile
-shutil
