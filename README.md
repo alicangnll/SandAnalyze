@@ -36,6 +36,6 @@ Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyan
 <br>
 
 <h2>📷 Video</h2>
-[![Watch the video](pic/test2.png)]([https://youtu.be/vt5fpE0bzSY](https://github.com/alicangnll/SandAnalyze/assets/23417905/6d6f65da-7bb5-406d-8abd-1b71999b378d))
+[![Watch the video](https://raw.githubusercontent.com/alicangnll/SandAnalyze/main/pic/test2.png)](https://github.com/alicangnll/SandAnalyze/assets/23417905/6d6f65da-7bb5-406d-8abd-1b71999b378d)
 <br>
 <b>Powered by <a href="https://docs.qiling.io/en/latest">Qiling Framework</a></b>
