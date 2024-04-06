@@ -43,7 +43,7 @@ class QilingSandBox_Windows_x86_64:
         ql.debugger = str(debugger)
         ql.run(timeout=5000)
 
-    def shellcode_sandbox(path, rtfs, shellcode, debugger = "gdb"):
+    def shellcode_sandbox(path, shellcode, rtfs = os.getcwd() + "/examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(shellcoder=shellcode, rootfs=r"" + rtfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
         ql.run(timeout=5000)
@@ -80,12 +80,16 @@ class QilingSandBox_Windows_x86_64:
         arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE(os.getcwd() + "/exefiles/" + exeloc)))
         print("[+] Arch : " + arch)
         if(arch == "64"):
+            # Create folder if was not created
             if os.path.exists(os.getcwd() + "/examples/rootfs/x8664_windows/bin") is False:
                 os.mkdir(os.getcwd() + "/examples/rootfs/x8664_windows/bin")
+
             shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc)
             QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc],  os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
         else:
-            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc)
+            # Create folder if was not created
             if os.path.exists(os.getcwd() + "/examples/rootfs/x86_windows/bin") is False:
                 os.mkdir(os.getcwd() + "/examples/rootfs/x86_windows/bin")
+
+            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc)
             QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc], os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
