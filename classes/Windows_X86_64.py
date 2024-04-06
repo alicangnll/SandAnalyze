@@ -38,12 +38,12 @@ class QilingSandBox_Windows_x86_64:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
-    def my_sandbox(path, rootfs = os.getcwd() + "/examples/rootfs/x8664_windows", debugger = "gdb"):
+    def my_sandbox(path, rootfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
         ql.run(timeout=5000)
 
-    def shellcode_sandbox(path, shellcode, rtfs = os.getcwd() + "/examples/rootfs/x8664_windows", debugger = "gdb"):
+    def shellcode_sandbox(path, shellcode, rtfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(shellcoder=shellcode, rootfs=r"" + rtfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
         ql.run(timeout=5000)
@@ -53,7 +53,7 @@ class QilingSandBox_Windows_x86_64:
         QilingSandBox_Windows_x86_64.stop(ql)
         return True
 
-    def wannacry_hunter(path, rootfs = os.getcwd() + "/examples/rootfs/x8664_windows", memloc = 0x40819a):
+    def wannacry_hunter(path, rootfs = "examples/rootfs/x8664_windows", memloc = 0x40819a):
         ql = Qiling(r"" + path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         found = ql.hook_address(QilingSandBox_Windows_x86_64.stopatkillerswtich, memloc)
         if found is True:
@@ -62,14 +62,14 @@ class QilingSandBox_Windows_x86_64:
             return False
     
     # Anaylzer for Windows
-    def windisk_analyze(binfile, driveid, rootfs = os.getcwd() + "/examples/rootfs/x8664_windows"):
+    def windisk_analyze(binfile, driveid, rootfs = "examples/rootfs/x8664_windows"):
         ql = Qiling(r"" + binfile, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.add_fs_mapper(r"\\.\PHYSICALDRIVE" + int(driveid) + "", Fake_Drive())
         ql.run(timeout=5000)
 
     def sandbox_analyze(exeloc, debugger):
         try:
-            QilingSandBox_Windows_x86_64.pe_load(pefile.PE(os.getcwd() + "/exefiles/" + exeloc))
+            QilingSandBox_Windows_x86_64.pe_load(pefile.PE("exefiles/" + exeloc))
         except OSError as e:
             print(e)
             sys.exit()
@@ -77,19 +77,19 @@ class QilingSandBox_Windows_x86_64:
             print("[-] PEFormatError: %s" % e.value)
             print("[!] The file is not a valid PE")
             sys.exit()
-        arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE(os.getcwd() + "/exefiles/" + exeloc)))
+        arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE("exefiles/" + exeloc)))
         print("[+] Arch : " + arch)
         if(arch == "64"):
             # Create folder if was not created
-            if os.path.exists(os.getcwd() + "/examples/rootfs/x8664_windows/bin") is False:
-                os.mkdir(os.getcwd() + "/examples/rootfs/x8664_windows/bin")
+            if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
+                os.mkdir("examples/rootfs/x8664_windows/bin")
 
-            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc)
-            QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc],  os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
+            shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
+            QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows", debugger)
         else:
             # Create folder if was not created
-            if os.path.exists(os.getcwd() + "/examples/rootfs/x86_windows/bin") is False:
-                os.mkdir(os.getcwd() + "/examples/rootfs/x86_windows/bin")
+            if os.path.exists("examples/rootfs/x86_windows/bin") is False:
+                os.mkdir("examples/rootfs/x86_windows/bin")
 
-            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc)
-            QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc], os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
+            shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
+            QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows", debugger)
