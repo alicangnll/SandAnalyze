@@ -40,3 +40,5 @@ Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyan
 <source src="pic/example.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+
+<b>Powered by <a href="https://docs.qiling.io/en/latest">Qiling Framework</a></b>
