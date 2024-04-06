@@ -5,6 +5,7 @@ from qiling.os import *
 from capstone import *
 from qiling.const import QL_VERBOSE
 from qiling.os.mapper import QlFsMappedObject
+from qiling.extensions import trace
 
 
 class Fake_Drive(QlFsMappedObject):
@@ -38,19 +39,17 @@ class QilingSandBox_Windows_x86_64:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
-    def my_sandbox_nodebugger(path, rootfs = "examples/rootfs/x8664_windows"):
-        ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
+    def my_sandbox_nodebugger(path, arch, rootfs = "examples/rootfs/x8664_windows"):
+        ql = Qiling(path, r"" + rootfs, archtype=arch, ostype=QL_OS.WINDOWS, verbose=QL_VERBOSE.DEBUG)
         ql.run()
 
-    def my_sandbox(path, rootfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
-        ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
+    def my_sandbox(path, arch, rootfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
+        ql = Qiling(path, r"" + rootfs, archtype=arch, ostype=QL_OS.WINDOWS, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
-        ql.run(timeout=5000)
 
     def shellcode_sandbox(path, shellcode, rtfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(shellcoder=shellcode, rootfs=r"" + rtfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
-        ql.run(timeout=5000)
 
     def stopatkillerswtich(ql: Qiling):
         print("WannaCry Detected!")
@@ -90,14 +89,14 @@ class QilingSandBox_Windows_x86_64:
                     os.mkdir("examples/rootfs/x8664_windows/bin")
                     
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows")
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X8664, "examples/rootfs/x8664_windows")
             else:
                 # Create folder if was not created
                 if os.path.exists("examples/rootfs/x86_windows/bin") is False:
                     os.mkdir("examples/rootfs/x86_windows/bin")
                 
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows")
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x86_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x86_windows")
         else:
             if(arch == "64"):
                 # Create folder if was not created
@@ -105,11 +104,11 @@ class QilingSandBox_Windows_x86_64:
                     os.mkdir("examples/rootfs/x8664_windows/bin")
 
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows", debugger)
+                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X8664, "examples/rootfs/x8664_windows", debugger)
             else:
                 # Create folder if was not created
                 if os.path.exists("examples/rootfs/x86_windows/bin") is False:
                     os.mkdir("examples/rootfs/x86_windows/bin")
 
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows", debugger)
+                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x86_windows", debugger)
