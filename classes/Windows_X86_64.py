@@ -38,9 +38,9 @@ class QilingSandBox_Windows_x86_64:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
-    def my_sandbox_nodebug(path, rootfs = "examples/rootfs/x8664_windows"):
+    def my_sandbox_nodebugger(path, rootfs = "examples/rootfs/x8664_windows"):
         ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
-        ql.run(timeout=5000)
+        ql.run()
 
     def my_sandbox(path, rootfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
@@ -90,14 +90,14 @@ class QilingSandBox_Windows_x86_64:
                     os.mkdir("examples/rootfs/x8664_windows/bin")
                     
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox_nodebug(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows")
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows")
             else:
                 # Create folder if was not created
                 if os.path.exists("examples/rootfs/x86_windows/bin") is False:
                     os.mkdir("examples/rootfs/x86_windows/bin")
                 
                 shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox_nodebug(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows")
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows")
         else:
             if(arch == "64"):
                 # Create folder if was not created
