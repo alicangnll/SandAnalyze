@@ -2,8 +2,8 @@ import sys, os
 from classes.Windows_X86_64 import *
 from classes.Linux_X86_64 import *
 
-filelist_x86 = os.listdir("examples/rootfs/x86_windows/bin")
-filelist_x8664 = os.listdir("examples/rootfs/x8664_windows/bin")
+filelist_x86 = os.listdir("exefiles")
+filelist_x8664 = os.listdir("exefiles")
 try:
     exeloc = str(sys.argv[1])
     try:

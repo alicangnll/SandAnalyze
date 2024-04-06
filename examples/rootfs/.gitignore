@@ -1,0 +1,43 @@
+# IDE left over
+.DS_Store
+.vscode
+.idea
+*.pyc
+*.cache
+*.cache2
+.*.swp
+*.raw
+
+# cache and misc
+qiling.egg-info/
+__pycache__/
+*.py[cod]
+build
+dist
+
+# test and logs
+logs/
+log/
+test_qlog/
+log_test/
+qlog/
+qlogs/
+test_syscall_*.txt
+*.no.py
+.gitkeep
+test.file
+*.file
+*.qlog
+*.d
+*.o
+core
+*.perf
+x8664_macos/test.file
+
+x8664_macos/kext/SuperRootkit.kext/*
+x86_windows/bin/GandCrab502.bin
+x86_windows/bin/UselessDisk.bin
+x86_windows/bin/al-khaser.bin
+x86_windows/bin/sality.dll
+x86_windows/bin/wannacry.bin
+x86_linux/kernel/m0hamed_rootkit.ko

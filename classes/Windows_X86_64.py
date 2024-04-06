@@ -1,4 +1,4 @@
-import capstone, pefile, sys, random, os
+import capstone, pefile, sys, random, os, shutil
 from qiling import *
 from qiling.const import *
 from qiling.os import *
@@ -62,15 +62,14 @@ class QilingSandBox_Windows_x86_64:
             return False
     
     # Anaylzer for Windows
-    def windisk_analyze(path, rootfs, driveid, debugger = "gdb"):
-        ql = Qiling(r"" + path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
+    def windisk_analyze(binfile, driveid, rootfs = os.getcwd() + "/examples/rootfs/x8664_windows"):
+        ql = Qiling(r"" + binfile, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.add_fs_mapper(r"\\.\PHYSICALDRIVE" + int(driveid) + "", Fake_Drive())
-        ql.debugger = str(debugger)
         ql.run(timeout=5000)
 
     def sandbox_analyze(exeloc, debugger):
         try:
-            QilingSandBox_Windows_x86_64.pe_load(pefile.PE("examples/rootfs/x8664_windows/bin/" + exeloc))
+            QilingSandBox_Windows_x86_64.pe_load(pefile.PE(os.getcwd() + "/exefiles/" + exeloc))
         except OSError as e:
             print(e)
             sys.exit()
@@ -78,9 +77,15 @@ class QilingSandBox_Windows_x86_64:
             print("[-] PEFormatError: %s" % e.value)
             print("[!] The file is not a valid PE")
             sys.exit()
-        arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE(os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc)))
+        arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE(os.getcwd() + "/exefiles/" + exeloc)))
         print("[+] Arch : " + arch)
         if(arch == "64"):
+            if os.path.exists(os.getcwd() + "/examples/rootfs/x8664_windows/bin") is False:
+                os.mkdir(os.getcwd() + "/examples/rootfs/x8664_windows/bin")
+            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc)
             QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x8664_windows/bin/" + exeloc],  os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
         else:
+            shutil.copyfile(os.getcwd() + "/exefiles/" + exeloc, os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc)
+            if os.path.exists(os.getcwd() + "/examples/rootfs/x86_windows/bin") is False:
+                os.mkdir(os.getcwd() + "/examples/rootfs/x86_windows/bin")
             QilingSandBox_Windows_x86_64.my_sandbox([os.getcwd() + "/examples/rootfs/x86_windows/bin/" + exeloc], os.getcwd() + "/examples/rootfs/x8664_windows", debugger)
