@@ -2,8 +2,7 @@ import sys, os
 from classes.Windows_X86_64 import *
 from classes.Linux_X86_64 import *
 
-filelist_x86 = os.listdir("exefiles")
-filelist_x8664 = os.listdir("exefiles")
+filelist = os.listdir("exefiles")
 try:
     exeloc = str(sys.argv[1])
     try:
@@ -21,33 +20,19 @@ try:
         except:
             print("""
                   =========================================
-                  x86 File List
+                  File List
                   =========================================
                   """)
-            for i in filelist_x86:
-                print("[*] " + i + "\n")
-            print("""
-                  =========================================
-                  x64 File List
-                  =========================================
-                  """)
-            for i in filelist_x8664:
+            for i in filelist:
                 print("[*] " + i + "\n")
             print("Example example.py example.exe")
 except IndexError:
     print("""
           =========================================
-          x86 File List
+          File List
           =========================================
           """)
-    for i in filelist_x86:
-        print("[*] " + i + "\n")
-    print("""
-          =========================================
-          x64 File List
-          =========================================
-          """)
-    for i in filelist_x8664:
+    for i in filelist:
         print("[*] " + i + "\n")
     print("""
       # Run dllscollector.bat

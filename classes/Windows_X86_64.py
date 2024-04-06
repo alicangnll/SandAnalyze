@@ -38,6 +38,10 @@ class QilingSandBox_Windows_x86_64:
         ql.nprint("[+] Address found")
         ql.emu_stop()
 
+    def my_sandbox_nodebug(path, rootfs = "examples/rootfs/x8664_windows"):
+        ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
+        ql.run(timeout=5000)
+
     def my_sandbox(path, rootfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
@@ -79,17 +83,33 @@ class QilingSandBox_Windows_x86_64:
             sys.exit()
         arch = str(QilingSandBox_Windows_x86_64.arch(pefile.PE("exefiles/" + exeloc)))
         print("[+] Arch : " + arch)
-        if(arch == "64"):
-            # Create folder if was not created
-            if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
-                os.mkdir("examples/rootfs/x8664_windows/bin")
-
-            shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
-            QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows", debugger)
+        if debugger is None or debugger == "nodebug" or debugger == "":
+            if(arch == "64"):
+                # Create folder if was not created
+                if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x8664_windows/bin")
+                    
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebug(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows")
+            else:
+                # Create folder if was not created
+                if os.path.exists("examples/rootfs/x86_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x86_windows/bin")
+                
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebug(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows")
         else:
-            # Create folder if was not created
-            if os.path.exists("examples/rootfs/x86_windows/bin") is False:
-                os.mkdir("examples/rootfs/x86_windows/bin")
+            if(arch == "64"):
+                # Create folder if was not created
+                if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x8664_windows/bin")
 
-            shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-            QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows", debugger)
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc],  "examples/rootfs/x8664_windows", debugger)
+            else:
+                # Create folder if was not created
+                if os.path.exists("examples/rootfs/x86_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x86_windows/bin")
+
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], "examples/rootfs/x86_windows", debugger)
