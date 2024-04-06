@@ -36,6 +36,9 @@ Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyan
 <br>
 
 <h2>📷 Video</h2>
+
+<a href="https://github.com/alicangnll/SandAnalyze/blob/main/pic/installation.mp4">Installation</a>
+<br>
 <a href="https://github.com/alicangnll/SandAnalyze/assets/23417905/d91f09bb-c50c-4706-9489-fa96c72dec7f">Proof of Concepts</a>
 
 <br><br>
