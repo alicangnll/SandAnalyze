@@ -1,1 +1,1 @@
-<b>password to unzip example.bin.zip is "infected".</b>
+Required files for Qiling Framework test

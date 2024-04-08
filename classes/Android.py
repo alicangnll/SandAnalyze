@@ -1,4 +1,4 @@
-import platform, unittest
+import platform, unittest, shutil, os
 from collections import defaultdict
 from qiling import Qiling
 from qiling.os.mapper import QlFsMappedObject
@@ -26,39 +26,65 @@ def my_syscall_close(ql: Qiling, fd: int) -> int:
     return syscall.ql_syscall_close(ql, fd)
 
 OVERRIDES = {'mmap_address': 0x68000000}
+env = {
+    'ANDROID_DATA': r'/data',
+    'ANDROID_ROOT': r'/system'
+    }
 
 
 class TestAndroid(unittest.TestCase):
     @unittest.skipUnless(platform.system() == 'Linux', 'run only on Linux')
-    def test_android_arm64(self):
-        test_binary = "examples/rootfs/arm64_android6.0/bin/arm64_android_jniart"
-        rootfs = "examples/rootfs/arm64_android6.0"
-        env = {
-            'ANDROID_DATA': r'/data',
-            'ANDROID_ROOT': r'/system'
-        }
+    def test_android_arm64(exeloc):
+        if os.path.exists("examples/rootfs/arm64_android6/bin") is False:
+            os.mkdir("examples/rootfs/arm64_android6/bin")
+        
+        shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/arm64_android6/bin/" + exeloc)
 
-        ql = Qiling([test_binary], rootfs, env, profile={'OS64': OVERRIDES}, multithread=True)
-
+        ql = Qiling(["examples/rootfs/arm64_android6/bin/" + exeloc], "examples/rootfs/arm64_android6", env, profile={'OS64': OVERRIDES}, multithread=True)
         ql.os.set_syscall("close", my_syscall_close)
         ql.add_fs_mapper("/proc/self/task/2000/maps", Fake_maps(ql))
         ql.run()
-
         del ql
 
     @unittest.skipUnless(platform.system() == 'Linux', 'run only on Linux')
-    def test_android_arm(self):
-        test_binary = "examples/rootfs/arm64_android6.0/bin/arm_android_jniart"
-        rootfs = "examples/rootfs/arm64_android6.0"
-        env = {
-            'ANDROID_DATA': r'/data',
-            'ANDROID_ROOT': r'/system'
-        }
+    def debug_android_arm64(exeloc, debugger):
+        if os.path.exists("examples/rootfs/arm64_android6/bin") is False:
+            os.mkdir("examples/rootfs/arm64_android6/bin")
+        
+        shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/arm64_android6/bin/" + exeloc)
 
-        ql = Qiling([test_binary], rootfs, env, profile={'OS32': OVERRIDES}, multithread=True)
+        ql = Qiling(["examples/rootfs/arm64_android6/bin/" + exeloc], "examples/rootfs/arm64_android6", env, profile={'OS64': OVERRIDES}, multithread=True)
+        ql.os.set_syscall("close", my_syscall_close)
+        ql.add_fs_mapper("/proc/self/task/2000/maps", Fake_maps(ql))
+        ql.debugger = str(debugger)
+        ql.run()
+        del ql
 
+    @unittest.skipUnless(platform.system() == 'Linux', 'run only on Linux')
+    def debug_android_arm(exeloc, debugger):
+
+        if os.path.exists("examples/rootfs/arm64_android6/bin") is False:
+            os.mkdir("examples/rootfs/arm64_android6/bin")
+        
+        shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/arm64_android6/bin/" + exeloc)
+
+        ql = Qiling(["examples/rootfs/arm64_android6/bin/" + exeloc], "examples/rootfs/arm64_android6", env, profile={'OS32': OVERRIDES}, multithread=True)
+        ql.os.set_syscall("close", my_syscall_close)
+        ql.add_fs_mapper("/proc/self/task/2000/maps", Fake_maps(ql))
+        ql.debugger = str(debugger)
+        ql.run()
+        del ql
+
+    @unittest.skipUnless(platform.system() == 'Linux', 'run only on Linux')
+    def test_android_arm(exeloc):
+
+        if os.path.exists("examples/rootfs/arm64_android6/bin") is False:
+            os.mkdir("examples/rootfs/arm64_android6/bin")
+        
+        shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/arm64_android6/bin/" + exeloc)
+
+        ql = Qiling(["examples/rootfs/arm64_android6/bin/" + exeloc], "examples/rootfs/arm64_android6", env, profile={'OS32': OVERRIDES}, multithread=True)
         ql.os.set_syscall("close", my_syscall_close)
         ql.add_fs_mapper("/proc/self/task/2000/maps", Fake_maps(ql))
         ql.run()
-
         del ql

@@ -5,7 +5,6 @@ from qiling.os import *
 from capstone import *
 from qiling.const import QL_VERBOSE
 from qiling.os.mapper import QlFsMappedObject
-from qiling.extensions import trace
 
 
 class Fake_Drive(QlFsMappedObject):
@@ -65,7 +64,7 @@ class QilingSandBox_Windows_x86_64:
             return False
     
     # Anaylzer for Windows
-    def windisk_analyze(binfile, driveid, rootfs = "examples/rootfs/x8664_windows"):
+    def windisk_analyze(binfile, driveid = 0, rootfs = "examples/rootfs/x8664_windows"):
         ql = Qiling(r"" + binfile, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
         ql.add_fs_mapper(r"\\.\PHYSICALDRIVE" + int(driveid) + "", Fake_Drive())
         ql.run(timeout=5000)
@@ -92,11 +91,11 @@ class QilingSandBox_Windows_x86_64:
                 QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X8664, "examples/rootfs/x8664_windows")
             else:
                 # Create folder if was not created
-                if os.path.exists("examples/rootfs/x86_windows/bin") is False:
-                    os.mkdir("examples/rootfs/x86_windows/bin")
+                if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x8664_windows/bin")
                 
-                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x86_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x86_windows")
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox_nodebugger(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x8664_windows")
         else:
             if(arch == "64"):
                 # Create folder if was not created
@@ -107,8 +106,8 @@ class QilingSandBox_Windows_x86_64:
                 QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X8664, "examples/rootfs/x8664_windows", debugger)
             else:
                 # Create folder if was not created
-                if os.path.exists("examples/rootfs/x86_windows/bin") is False:
-                    os.mkdir("examples/rootfs/x86_windows/bin")
+                if os.path.exists("examples/rootfs/x8664_windows/bin") is False:
+                    os.mkdir("examples/rootfs/x8664_windows/bin")
 
-                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x86_windows/bin/" + exeloc)
-                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x86_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x86_windows", debugger)
+                shutil.copyfile("exefiles/" + exeloc, "examples/rootfs/x8664_windows/bin/" + exeloc)
+                QilingSandBox_Windows_x86_64.my_sandbox(["examples/rootfs/x8664_windows/bin/" + exeloc], QL_ARCH.X86, "examples/rootfs/x8664_windows", debugger)
