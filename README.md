@@ -41,7 +41,7 @@ Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyan
 <br>
 <a href="https://github.com/alicangnll/SandAnalyze/assets/23417905/d91f09bb-c50c-4706-9489-fa96c72dec7f">Proof of Concepts</a>
 
-<h3>NOTE </h3>
+<h2>NOTE </h2>
 <p>
 <b>UC_ERR_FETCH_UNMAPPED, UC_ERR_WRITE_UNMAPPED and related issues</b>
 
