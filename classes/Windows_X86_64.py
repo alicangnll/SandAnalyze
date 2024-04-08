@@ -49,25 +49,21 @@ class QilingSandBox_Windows_x86_64:
     def shellcode_sandbox(path, shellcode, rtfs = "examples/rootfs/x8664_windows", debugger = "gdb"):
         ql = Qiling(shellcoder=shellcode, rootfs=r"" + rtfs, verbose=QL_VERBOSE.DEBUG)
         ql.debugger = str(debugger)
-
-    def stopatkillerswtich(ql: Qiling):
-        print("WannaCry Detected!")
-        QilingSandBox_Windows_x86_64.stop(ql)
-        return True
-
-    def wannacry_hunter(path, rootfs = "examples/rootfs/x8664_windows", memloc = 0x40819a):
-        ql = Qiling(r"" + path, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
-        found = ql.hook_address(QilingSandBox_Windows_x86_64.stopatkillerswtich, memloc)
-        if found is True:
-            return True
-        else:
-            return False
     
     # Anaylzer for Windows
-    def windisk_analyze(binfile, driveid = 0, rootfs = "examples/rootfs/x8664_windows"):
-        ql = Qiling(r"" + binfile, r"" + rootfs, verbose=QL_VERBOSE.DEBUG)
-        ql.add_fs_mapper(r"\\.\PHYSICALDRIVE" + int(driveid) + "", Fake_Drive())
-        ql.run(timeout=5000)
+    def windisk_analyze(binfile, debugger, driveid = 0, rootfs = "examples/rootfs/x8664_windows"):
+        
+        if os.path.exists("examples/rootfs/x86_windows/bin") is False:
+            os.mkdir("examples/rootfs/x86_windows/bin")
+                    
+        shutil.copyfile("exefiles/" + binfile, "examples/rootfs/x86_windows/bin/" + binfile)
+        if debugger is None or debugger == "nodebug" or debugger == "":
+            ql = Qiling(["examples/rootfs/x86_windows/bin/" + binfile], r"" + rootfs, archtype=QL_ARCH.X86, ostype=QL_OS.WINDOWS, verbose=QL_VERBOSE.DEBUG)
+            ql.add_fs_mapper(r"\\.\PHYSICALDRIVE" + str(driveid), Fake_Drive())
+            ql.run(timeout=5000)
+        else:
+            ql = Qiling(["examples/rootfs/x86_windows/bin/" + binfile], r"" + rootfs, archtype=QL_ARCH.X86, ostype=QL_OS.WINDOWS, verbose=QL_VERBOSE.DEBUG)
+            ql.debugger = str(debugger)
 
     def sandbox_analyze(exeloc, debugger):
         try:

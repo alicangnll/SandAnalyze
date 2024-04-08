@@ -1,8 +1,12 @@
-import sys, os
+import sys
 from classes.Windows_X86_64 import *
 from classes.Linux_X86_64 import *
 
-filelist = os.listdir("exefiles")
+print("======================================")
+print("         SandAnalyze - Malware Analysis Tool           ")
+print("Example : python3 example.py example.exe nodebug / gdb / qdb")
+print("======================================")
+
 try:
     exeloc = str(sys.argv[1])
     debugger = str(sys.argv[2])

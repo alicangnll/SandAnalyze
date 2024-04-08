@@ -1,7 +1,11 @@
-import sys, os
+import sys
 from classes.Android import *
 
-filelist = os.listdir("exefiles")
+print("======================================")
+print("         SandAnalyze - Malware Analysis Tool           ")
+print("Example : python3 example_android.py example_android_arm arm64 / arm  nodebug / gdb / qdb")
+print("======================================")
+
 try:
     exeloc = str(sys.argv[1])
     type = str(sys.argv[2])

@@ -1,7 +1,11 @@
-import sys, os
+import sys
 from classes.iOS import *
 
-filelist = os.listdir("exefiles")
+print("======================================")
+print("         SandAnalyze - Malware Analysis Tool           ")
+print("Example : python3 example_ios.py example_ios_arm64 nodebug / gdb / qdb")
+print("======================================")
+
 try:
     exeloc = str(sys.argv[1])
     debugger = str(sys.argv[2])
@@ -16,7 +20,7 @@ except:
     debugger = "nodebug"
     
 if exeloc is None or exeloc == "" or debugger is None or debugger == "":
-    print("Example : python3 example_ios.py example_ios_arm64  nodebug / gdb / qdb")
+    print("Example : python3 example_ios.py example_ios_arm64 nodebug / gdb / qdb")
 else:
     if debugger == "qdb" or debugger == "gdb":
             try:
