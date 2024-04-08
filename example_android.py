@@ -7,7 +7,7 @@ try:
     type = str(sys.argv[2])
     debugger = str(sys.argv[3])
 except IndexError:
-    print("Example : python3 example.py example_android_arm arm64 / arm  nodebug / gdb / qdb")
+    print("Example : python3 example_android.py example_android_arm arm64 / arm  nodebug / gdb / qdb")
 except:
     print("""
           [*] Since no architect (arm / arm64) is selected, it is selected 'arm'
@@ -18,7 +18,7 @@ except:
     type = "arm"
     
 if exeloc is None or exeloc == "" or type is None or type == "" or debugger is None or debugger == "":
-    print("Example : python3 example.py example_android_arm arm64 / arm  nodebug / gdb / qdb")
+    print("Example : python3 example_android.py example_android_arm arm64 / arm  nodebug / gdb / qdb")
 else:
     if type == "arm64":
         if debugger == "qdb" or debugger == "gdb":
