@@ -1,4 +1,4 @@
-# 🚀 SandAnalyze - Simulate Windows EXE on Linux / macOS!
+# 🚀 SandAnalyze - Simulate Windows EXE on Linux or macOS!
 
 <h2>❓What is This ?</h2>
 <p>
