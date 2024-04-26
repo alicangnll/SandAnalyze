@@ -3,11 +3,11 @@
 <h2>❓What is This ?</h2>
 <p>
 <h3>ENGLISH</h3>
-SandAnalyze is a program that allows you to examine Windows EXE files on Linux with the help of GDB Debugger and perform operations on memory.
+SandAnalyze is a program that allows you to examine Windows EXE files on Linux with the help of GDB Debugger or QDB Debugger and perform operations on memory.
 <br><br>
 <h3>TURKISH</h3>
 <hr>
-SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger yardımıyla inceleyebileceğiniz ve memory üzerinde işlem yapabileceğiniz bir programdır.
+SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger veya QDB Debugger yardımıyla inceleyebileceğiniz ve memory üzerinde işlem yapabileceğiniz bir programdır.
 </p>
 
 <br>
