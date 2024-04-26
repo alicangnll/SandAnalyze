@@ -10,6 +10,15 @@ SandAnalyze is a program that allows you to examine Windows EXE files on Linux w
 SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger veya QDB Debugger yardımıyla inceleyebileceğiniz ve memory üzerinde işlem yapabileceğiniz bir programdır.
 </p>
 
+<h2>❗Supports</h2>
+<ul>
+  <li>Windows (EXE and BIN)</li>
+  <li>macOS (DMG and BIN)</li>
+  <li>Android (APK, Testing)</li>
+  <li>iOS (APK, Testing)</li>
+</ul>
+
+
 <br>
 <img src="pic/test2.png" />
 <br>
