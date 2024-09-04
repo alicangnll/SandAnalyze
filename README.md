@@ -35,7 +35,7 @@ After all these procedures, you can start examining your EXE file with the "pyth
 <h3>TURKISH</h3>
 <br>
 Öncelikle, Windows bir bilgisayar üzerinde "dllscollector.bat" dosyasını çalıştırın.
-İncelemek istediğiniz dosya eğer 32 bit ise "examples/rootfs/x86_windows/bin" klasörü içerisine, 64 bit ise "examples/rootfs/x8664_windows/bin" klasörü içerisine EXE dosyasını kopyalayın
+İncelemek istediğiniz dosyayı "exefiles" klasörü içerisine kopyalayın
 Ardından Linux bir bilgisayar üzerinden "pip3 install -r requirements.txt" komutunu çalıştırıp Python PIP paketlerini kurun.
 Tüm bu işlemlerden sonra "python3 example.py example.exe" komutuyla EXE dosyanızı incelemeye başlayabilirsiniz.
 </p>
