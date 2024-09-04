@@ -28,7 +28,7 @@ SandAnalyze, Linux üzerinde Windows EXE dosyalarını GDB Debugger veya QDB Deb
 <h3>ENGLISH</h3>
 <br>
 First, run the "dllscollector.bat" file on a Windows computer.
-If the file you want to examine is 32 bit, copy the EXE file into the "examples/rootfs/x86_windows/bin" folder, if it is 64 bit, copy the EXE file into the "examples/rootfs/x8664_windows/bin" folder.
+If the file you want to examine, copy the EXE file into the "exefiles" folder.
 Then, run the "pip3 install -r requirements.txt" command on a Linux computer and install the Python PIP packages.
 After all these procedures, you can start examining your EXE file with the "python3 example.py example.exe" command.
 <br>
